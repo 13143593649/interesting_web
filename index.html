@@ -13,9 +13,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Noto+Sans+SC:wght@300;500&display=swap" rel="stylesheet">
     
     <style>
+        html, body {
+            min-height: 100%;
+        }
+
         body {
             font-family: 'Noto Sans SC', sans-serif;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
             background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
         }
         
@@ -28,7 +34,7 @@
             background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fad0c4, #a18cd1);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -78,7 +84,7 @@
 
         /* 粒子画布 */
         #canvas-container {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -106,14 +112,14 @@
         }
     </style>
 </head>
-<body class="h-screen w-screen flex items-center justify-center relative text-gray-800">
+<body class="min-h-screen w-full flex flex-col items-center relative text-gray-800 py-6 md:py-8 pb-16">
 
     <!-- 动态背景层 -->
     <div class="bg-animated"></div>
     <canvas id="canvas-container"></canvas>
 
     <!-- 主容器 -->
-    <main class="relative z-10 w-full max-w-4xl p-4 flex flex-col md:flex-row gap-8 items-center justify-center h-full">
+    <main class="relative z-10 w-full max-w-4xl px-4 flex flex-col md:flex-row gap-6 md:gap-8 items-center justify-center flex-1">
         
         <!-- 左侧：视觉展示区 -->
         <div class="w-full md:w-1/2 flex flex-col items-center justify-center float fade-in" style="animation-delay: 0.5s;">
@@ -197,7 +203,7 @@
     </main>
 
     <!-- 底部版权 -->
-    <footer class="absolute bottom-4 w-full text-center text-gray-500 text-xs z-10">
+    <footer class="relative w-full text-center text-gray-500 text-xs z-10 py-4 shrink-0">
         <p>Made with <i class="fas fa-heart text-red-500 animate-pulse"></i> by Code & Love</p>
     </footer>
 
