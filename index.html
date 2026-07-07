@@ -1,0 +1,378 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>致我最爱的你</title>
+    <!-- 引入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 引入 Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Noto+Sans+SC:wght@300;500&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            overflow: hidden;
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+        }
+        
+        .handwriting {
+            font-family: 'Dancing Script', cursive;
+        }
+
+        /* 背景动画 */
+        .bg-animated {
+            background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fad0c4, #a18cd1);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* 心跳动画 */
+        .heart-beat {
+            animation: heartbeat 1.5s ease-in-out infinite both;
+        }
+
+        @keyframes heartbeat {
+            from { transform: scale(1); transform-origin: center center; animation-timing-function: ease-out; }
+            10% { transform: scale(0.91); animation-timing-function: ease-in; }
+            17% { transform: scale(0.98); animation-timing-function: ease-out; }
+            33% { transform: scale(0.87); animation-timing-function: ease-in; }
+            45% { transform: scale(1); animation-timing-function: ease-out; }
+        }
+
+        /* 浮动动画 */
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* 玻璃拟态卡片 */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        /* 粒子画布 */
+        #canvas-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* 隐藏滚动条但保留功能 */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .fade-in {
+            animation: fadeIn 2s ease-in forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="h-screen w-screen flex items-center justify-center relative text-gray-800">
+
+    <!-- 动态背景层 -->
+    <div class="bg-animated"></div>
+    <canvas id="canvas-container"></canvas>
+
+    <!-- 主容器 -->
+    <main class="relative z-10 w-full max-w-4xl p-4 flex flex-col md:flex-row gap-8 items-center justify-center h-full">
+        
+        <!-- 左侧：视觉展示区 -->
+        <div class="w-full md:w-1/2 flex flex-col items-center justify-center float fade-in" style="animation-delay: 0.5s;">
+            <div class="relative group cursor-pointer" id="main-heart">
+                <!-- 大爱心 SVG -->
+                <svg class="w-64 h-64 text-red-500 heart-beat drop-shadow-2xl filter" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+                <!-- 中心文字 -->
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <span class="text-white text-4xl font-bold handwriting drop-shadow-md">Love</span>
+                </div>
+            </div>
+            
+            <!-- 照片轮播或装饰 (使用占位图) -->
+            <div class="mt-8 glass-card p-2 rounded-xl transform rotate-3 hover:rotate-0 transition duration-500">
+                <img src="https://i.ibb.co/Q7ZB1H55/c787987c6f0d7a13ba1b65dc8cc8c691.jpg" alt="浪漫情侣剪影" class="rounded-lg shadow-inner w-64 h-40 object-cover">
+                <p class="text-center text-sm mt-2 text-gray-700 font-medium">Our Memories</p>
+            </div>
+        </div>
+
+        <!-- 右侧：交互内容区 -->
+        <div class="w-full md:w-1/2 flex flex-col gap-6 fade-in" style="animation-delay: 1s;">
+            
+            <!-- 标题区域 -->
+            <div class="glass-card p-6 text-center">
+                <h1 class="text-3xl md:text-4xl font-bold text-pink-600 mb-2 handwriting">To My Dearest</h1>
+                <div class="h-1 w-20 bg-pink-400 mx-auto rounded-full"></div>
+            </div>
+
+            <!-- 计时器区域 -->
+            <div class="glass-card p-6">
+                <h2 class="text-lg font-semibold text-gray-700 mb-4 text-center"><i class="fas fa-clock mr-2 text-pink-500"></i>我们在一起已经</h2>
+                <div class="grid grid-cols-4 gap-2 text-center" id="timer">
+                    <div class="bg-white/50 rounded-lg p-2 shadow-sm">
+                        <span class="block text-2xl font-bold text-pink-600" id="days">0</span>
+                        <span class="text-xs text-gray-500">天</span>
+                    </div>
+                    <div class="bg-white/50 rounded-lg p-2 shadow-sm">
+                        <span class="block text-2xl font-bold text-pink-600" id="hours">0</span>
+                        <span class="text-xs text-gray-500">时</span>
+                    </div>
+                    <div class="bg-white/50 rounded-lg p-2 shadow-sm">
+                        <span class="block text-2xl font-bold text-pink-600" id="minutes">0</span>
+                        <span class="text-xs text-gray-500">分</span>
+                    </div>
+                    <div class="bg-white/50 rounded-lg p-2 shadow-sm">
+                        <span class="block text-2xl font-bold text-pink-600" id="seconds">0</span>
+                        <span class="text-xs text-gray-500">秒</span>
+                    </div>
+                </div>
+                <p class="text-center text-xs text-gray-500 mt-2">每一秒都是心动的证明</p>
+            </div>
+
+            <!-- 留言/信件区域 -->
+            <div class="glass-card p-6 relative overflow-hidden group">
+                <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-pink-300 rounded-full opacity-20 blur-xl group-hover:scale-150 transition duration-700"></div>
+                
+                <h3 class="text-xl font-bold text-gray-800 mb-3"><i class="fas fa-envelope-open-text mr-2 text-pink-500"></i>想对你说的话</h3>
+                
+                <div class="h-32 overflow-y-auto no-scrollbar text-gray-700 leading-relaxed text-sm md:text-base pr-2" id="love-letter">
+                    <p class="mb-2">亲爱的：</p>
+                    <p class="mb-2">在这个数字时代，我想用最极客也最浪漫的方式告诉你：你是我代码里唯一的 Bug，也是我生命中最美的 Feature。</p>
+                    <p class="mb-2">无论世界如何变化，我的爱就像死循环一样，没有出口，只有无尽的执行。</p>
+                    <p>愿未来的每一天，都有你相伴。</p>
+                </div>
+
+                <!-- 互动按钮 -->
+                <div class="mt-4 flex justify-between items-center">
+                    <button id="btn-like" class="flex items-center gap-2 px-4 py-2 bg-pink-500 hover:bg-pink-600 text-white rounded-full transition shadow-lg transform hover:scale-105 active:scale-95">
+                        <i class="fas fa-heart"></i> <span>喜欢</span> <span id="like-count" class="font-bold">(0)</span>
+                    </button>
+                    
+                    <button id="btn-music" class="w-10 h-10 rounded-full bg-white/50 hover:bg-white text-pink-500 flex items-center justify-center transition shadow-md">
+                        <i class="fas fa-music"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- 底部版权 -->
+    <footer class="absolute bottom-4 w-full text-center text-gray-500 text-xs z-10">
+        <p>Made with <i class="fas fa-heart text-red-500 animate-pulse"></i> by Code & Love</p>
+    </footer>
+
+    <!-- 音频元素 (隐藏) -->
+    <!-- 注意：由于浏览器自动播放策略，通常需要用户交互后才能播放 -->
+    <audio id="bg-music" loop>
+        <source src="https://www.soundhelix.com/Games/Music/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        您的浏览器不支持 audio 元素。
+    </audio>
+
+    <script>
+        (function () {
+            // 起始日期：年, 月(0=一月), 日
+            var LOVE_START_DATE = new Date(2026, 1, 12);
+
+            function pad2(n) { return n < 10 ? '0' + n : String(n); }
+
+            function updateTimer() {
+                if (!LOVE_START_DATE || isNaN(LOVE_START_DATE.getTime())) return;
+                var diff = Math.max(0, Date.now() - LOVE_START_DATE.getTime());
+                var d = document.getElementById('days');
+                var h = document.getElementById('hours');
+                var m = document.getElementById('minutes');
+                var s = document.getElementById('seconds');
+                if (!d || !h || !m || !s) return;
+                d.textContent = Math.floor(diff / 86400000);
+                h.textContent = pad2(Math.floor((diff % 86400000) / 3600000));
+                m.textContent = pad2(Math.floor((diff % 3600000) / 60000));
+                s.textContent = pad2(Math.floor((diff % 60000) / 1000));
+            }
+
+            function startTimer() {
+                updateTimer();
+                setInterval(updateTimer, 1000);
+            }
+
+            function createFloatingHeart(element) {
+                var heart = document.createElement('i');
+                heart.classList.add('fas', 'fa-heart', 'text-pink-500', 'absolute', 'text-xl');
+                var rect = element.getBoundingClientRect();
+                var randomX = Math.random() * 40 - 20;
+                heart.style.left = (rect.left + rect.width / 2 + randomX) + 'px';
+                heart.style.top = rect.top + 'px';
+                heart.style.pointerEvents = 'none';
+                heart.style.transition = 'all 1s ease-out';
+                heart.style.zIndex = '100';
+                document.body.appendChild(heart);
+                requestAnimationFrame(function () {
+                    heart.style.transform = 'translateY(-100px) scale(1.5)';
+                    heart.style.opacity = '0';
+                });
+                setTimeout(function () { heart.remove(); }, 1000);
+            }
+
+            function initInteractions() {
+                var likeBtn = document.getElementById('btn-like');
+                var likeCountSpan = document.getElementById('like-count');
+                var STORAGE_KEY = 'love_page_likes';
+                var likes = parseInt(localStorage.getItem(STORAGE_KEY), 10) || 520;
+                likeCountSpan.innerText = '(' + likes + ')';
+
+                likeBtn.addEventListener('click', function () {
+                    likes++;
+                    localStorage.setItem(STORAGE_KEY, likes);
+                    likeCountSpan.innerText = '(' + likes + ')';
+                    likeBtn.classList.add('scale-110');
+                    setTimeout(function () { likeBtn.classList.remove('scale-110'); }, 200);
+                    createFloatingHeart(likeBtn);
+                });
+
+                var musicBtn = document.getElementById('btn-music');
+                var audio = document.getElementById('bg-music');
+                var isPlaying = false;
+
+                musicBtn.addEventListener('click', function () {
+                    if (isPlaying) {
+                        audio.pause();
+                        musicBtn.innerHTML = '<i class="fas fa-music"></i>';
+                        musicBtn.classList.remove('animate-spin');
+                    } else {
+                        audio.play().catch(function () {});
+                        musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                        musicBtn.classList.add('animate-spin', 'duration-3000');
+                    }
+                    isPlaying = !isPlaying;
+                });
+            }
+
+            function initParticles() {
+                var canvas = document.getElementById('canvas-container');
+                var ctx = canvas.getContext('2d');
+                var width, height;
+                var particles = [];
+
+                function resize() {
+                    width = window.innerWidth;
+                    height = window.innerHeight;
+                    canvas.width = width;
+                    canvas.height = height;
+                }
+
+                window.addEventListener('resize', resize);
+                resize();
+
+                function Particle() {
+                    this.reset();
+                }
+
+                Particle.prototype.reset = function () {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                    this.size = Math.random() * 3 + 1;
+                    this.speedX = Math.random() * 1 - 0.5;
+                    this.speedY = Math.random() * 1 - 0.5;
+                    this.color = 'rgba(255, ' + Math.floor(Math.random() * 100 + 150) + ', ' + Math.floor(Math.random() * 100 + 150) + ', ' + (Math.random() * 0.5 + 0.1) + ')';
+                    this.shape = Math.random() > 0.5 ? 'circle' : 'heart';
+                };
+
+                Particle.prototype.update = function () {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+                    if (this.x < 0 || this.x > width || this.y < 0 || this.y > height) {
+                        this.reset();
+                    }
+                };
+
+                Particle.prototype.draw = function () {
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    if (this.shape === 'circle') {
+                        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    } else {
+                        var topCurveHeight = this.size * 0.3;
+                        ctx.moveTo(this.x, this.y + topCurveHeight);
+                        ctx.bezierCurveTo(this.x, this.y, this.x - this.size / 2, this.y, this.x - this.size / 2, this.y + topCurveHeight);
+                        ctx.bezierCurveTo(this.x - this.size / 2, this.y + (this.size + topCurveHeight) / 2, this.x, this.y + (this.size + topCurveHeight) / 2, this.x, this.y + this.size);
+                        ctx.bezierCurveTo(this.x, this.y + (this.size + topCurveHeight) / 2, this.x + this.size / 2, this.y + (this.size + topCurveHeight) / 2, this.x + this.size / 2, this.y + topCurveHeight);
+                        ctx.bezierCurveTo(this.x + this.size / 2, this.y, this.x, this.y, this.x, this.y + topCurveHeight);
+                    }
+                    ctx.fill();
+                };
+
+                function init() {
+                    particles = [];
+                    var particleCount = Math.min(window.innerWidth / 10, 100);
+                    for (var i = 0; i < particleCount; i++) {
+                        particles.push(new Particle());
+                    }
+                }
+
+                function animate() {
+                    ctx.clearRect(0, 0, width, height);
+                    for (var j = 0; j < particles.length; j++) {
+                        particles[j].update();
+                        particles[j].draw();
+                    }
+                    requestAnimationFrame(animate);
+                }
+
+                init();
+                animate();
+            }
+
+            function boot() {
+                startTimer();
+                initParticles();
+                initInteractions();
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', boot);
+            } else {
+                boot();
+            }
+        })();
+    </script>
+</body>
+</html>
