@@ -190,7 +190,7 @@
                 <!-- 互动按钮 -->
                 <div class="mt-4 flex justify-between items-center">
                     <button id="btn-like" class="flex items-center gap-2 px-4 py-2 bg-pink-500 hover:bg-pink-600 text-white rounded-full transition shadow-lg transform hover:scale-105 active:scale-95">
-                        <i class="fas fa-heart"></i> <span>喜欢</span> <span id="like-count" class="font-bold">(0)</span>
+                        <i class="fas fa-heart"></i> <span>喜欢</span> <span class="font-bold">(520)</span>
                     </button>
                     
                     <button id="btn-music" class="w-10 h-10 rounded-full bg-white/50 hover:bg-white text-pink-500 flex items-center justify-center transition shadow-md">
@@ -260,15 +260,8 @@
 
             function initInteractions() {
                 var likeBtn = document.getElementById('btn-like');
-                var likeCountSpan = document.getElementById('like-count');
-                var STORAGE_KEY = 'love_page_likes';
-                var likes = parseInt(localStorage.getItem(STORAGE_KEY), 10) || 520;
-                likeCountSpan.innerText = '(' + likes + ')';
 
                 likeBtn.addEventListener('click', function () {
-                    likes++;
-                    localStorage.setItem(STORAGE_KEY, likes);
-                    likeCountSpan.innerText = '(' + likes + ')';
                     likeBtn.classList.add('scale-110');
                     setTimeout(function () { likeBtn.classList.remove('scale-110'); }, 200);
                     createFloatingHeart(likeBtn);
